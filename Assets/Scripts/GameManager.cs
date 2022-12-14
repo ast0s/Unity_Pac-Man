@@ -6,11 +6,13 @@ public class GameManager : MonoBehaviour
     public Ghost[] ghosts;
     public Transform pellets;
 
-    public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
     public int lives { get; private set; }
 
-    private void Start() => NewGame();
+    private void Start()
+    {
+        NewGame();
+    }
 
     private void NewGame()
     {
@@ -22,16 +24,18 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (lives <= 0 && Input.anyKeyDown)
+        {
             NewGame();
+        }
     }
 
     private void GameOver()
     {
         foreach (Transform pellet in pellets)
-            pellet.gameObject.SetActive(false);
+        { pellet.gameObject.SetActive(false); }
 
         foreach (Ghost ghost in ghosts)
-            ghost.gameObject.SetActive(false);
+        { ghost.gameObject.SetActive(false); }
 
         pacman.gameObject.SetActive(false);
     }
@@ -39,18 +43,17 @@ public class GameManager : MonoBehaviour
     private void NewRound()
     {
         foreach(Transform pellet in pellets) 
-            pellet.gameObject.SetActive(true);
+        { pellet.gameObject.SetActive(true); }
 
         ResetState();
     }
 
     private void ResetState()
     {
-        ResetGhostMultiplier();
-        foreach (Ghost ghost in ghosts) 
-            ghost.ResetState();
+        foreach (Ghost ghost in ghosts)
+        { ghost.gameObject.SetActive(true); }
 
-        pacman.ResetState();
+        pacman.gameObject.SetActive(true);
     }
 
     private void SetScore(int score)
@@ -64,11 +67,9 @@ public class GameManager : MonoBehaviour
 
     public void GhostEaten(Ghost ghost)
     {
-        int points = ghost.points * ghostMultiplier;
-        SetScore(score + points);
-        ghostMultiplier++;
+        SetScore(score + ghost.points);
     }
-    public void PacmanEaten()
+    public void PacmanEaten(Ghost ghost)
     {
         pacman.gameObject.SetActive(false);
 
@@ -78,36 +79,5 @@ public class GameManager : MonoBehaviour
             Invoke(nameof(ResetState), 3.0f);
         else
             GameOver();
-    }
-    public void PelletEaten(Pellet pellet)
-    {
-        pellet.gameObject.SetActive(false);
-
-        SetScore(score + pellet.points);
-
-        if (!HasRemainingPellets())
-        {
-            pacman.gameObject.SetActive(false);
-            Invoke(nameof(NewRound), 3.0f);
-        }
-    }
-    public void PowerPelletEaten(PowerPellet pellet)
-    {
-        PelletEaten(pellet);
-        CancelInvoke();
-        Invoke(nameof(ResetGhostMultiplier), pellet.duration);
-    }
-    private bool HasRemainingPellets()
-    {
-        foreach (Transform pellet in pellets)
-            if (pellet.gameObject.activeSelf) 
-                return true;
-
-        return false;
-    }
-
-    private void ResetGhostMultiplier()
-    {
-        ghostMultiplier = 1;
     }
 }

@@ -8,19 +8,22 @@ public class AnimatedSprite : MonoBehaviour
     public int animFrame { get; private set; }
     public bool loop = true;
 
-    private void Awake() => sr = GetComponent<SpriteRenderer>();
+    private void Awake() { sr = GetComponent<SpriteRenderer>(); }
 
-    private void Start() => InvokeRepeating(nameof(Advance), animTime, animTime);
+    private void Start()
+    {
+        InvokeRepeating(nameof(Advance), animTime, animTime);
+    }
 
     private void Advance()
     {
         animFrame++;
 
-        if (!sr.enabled) return;    
+        if (!sr.enabled) { return; }
 
-        if (animFrame >= sprites.Length && loop) animFrame = 0;
+        if (animFrame >= sprites.Length && loop) { animFrame = 0; }
 
-        if (animFrame >= 0 && animFrame < sprites.Length) sr.sprite = sprites[animFrame];
+        if (animFrame >= 0 && animFrame < sprites.Length) { sr.sprite = sprites[animFrame]; }
     }
 
     public void Restart()

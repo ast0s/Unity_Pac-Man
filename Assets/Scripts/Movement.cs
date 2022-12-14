@@ -17,10 +17,12 @@ public class Movement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        startingPosition = transform.position;
     }
 
-    private void Start() => ResetState();
+    private void Start()
+    {
+        ResetState();
+    }
 
     public void ResetState()
     {
@@ -34,7 +36,10 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        if (nextDirection != Vector2.zero) SetDirection(nextDirection);
+        if (nextDirection != Vector2.zero)
+        { 
+            SetDirection(nextDirection); 
+        }
     }
 
     private void FixedUpdate()
@@ -53,7 +58,9 @@ public class Movement : MonoBehaviour
             nextDirection = Vector2.zero;
         }
         else
+        {
             nextDirection = direction;
+        }
     }
 
     public bool Occupied(Vector2 direction)
