@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public Pacman pacman;
     public Ghost[] ghosts;
     public Transform pellets;
+
+    public Text gameOverText;
+    public Text scoreText;
+    public Text livesText;
 
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
@@ -25,20 +30,11 @@ public class GameManager : MonoBehaviour
             NewGame();
     }
 
-    private void GameOver()
-    {
-        foreach (Transform pellet in pellets)
-            pellet.gameObject.SetActive(false);
-
-        foreach (Ghost ghost in ghosts)
-            ghost.gameObject.SetActive(false);
-
-        pacman.gameObject.SetActive(false);
-    }
-
     private void NewRound()
     {
-        foreach(Transform pellet in pellets) 
+        gameOverText.enabled = false;
+
+        foreach (Transform pellet in pellets) 
             pellet.gameObject.SetActive(true);
 
         ResetState();
@@ -47,30 +43,44 @@ public class GameManager : MonoBehaviour
     private void ResetState()
     {
         ResetGhostMultiplier();
+
         foreach (Ghost ghost in ghosts) 
             ghost.ResetState();
 
         pacman.ResetState();
     }
 
+    private void GameOver()
+    {
+        gameOverText.enabled = true;
+
+        foreach (Ghost ghost in ghosts)
+            ghost.gameObject.SetActive(false);
+
+        pacman.gameObject.SetActive(false);
+    }
+
     private void SetScore(int score)
     {
         this.score = score;
+        scoreText.text = score.ToString().PadLeft(2, '0');
     }
     private void SetLives(int lives)
     {
         this.lives = lives;
+        livesText.text = "x" + lives.ToString();
     }
 
     public void GhostEaten(Ghost ghost)
     {
         int points = ghost.points * ghostMultiplier;
         SetScore(score + points);
+
         ghostMultiplier++;
     }
     public void PacmanEaten()
     {
-        pacman.gameObject.SetActive(false);
+        pacman.DeathSequence();
 
         SetLives(lives - 1);
 

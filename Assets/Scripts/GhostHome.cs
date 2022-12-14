@@ -13,7 +13,7 @@ public class GhostHome : GhostBehavior
 
     private void OnDisable()
     {
-        if (gameObject.activeSelf)
+        if (gameObject.activeInHierarchy)
             StartCoroutine(ExitTransition());
     }
 
@@ -36,25 +36,21 @@ public class GhostHome : GhostBehavior
 
         while (elapsed < duration) 
         {
-            Vector3 newPosition = Vector3.Lerp(position, inside.position, elapsed / duration);
-            newPosition.z = position.z;
-            ghost.transform.position = newPosition;
+            ghost.SetPosition(Vector3.Lerp(position, inside.position, elapsed / duration));
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        elapsed = 0.0f;
+        elapsed = 0f;
 
         while (elapsed < duration)
         {
-            Vector3 newPosition = Vector3.Lerp(inside.position, outside.position, elapsed / duration);
-            newPosition.z = position.z;
-            ghost.transform.position = newPosition;
+            ghost.SetPosition(Vector3.Lerp(inside.position, outside.position, elapsed / duration));
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        ghost.movement.SetDirection(new Vector2(Random.value < 0.5f ? -1.0f : 1.0f, 0.0f), true);
+        ghost.movement.SetDirection(new Vector2(Random.value < 0.5f ? -1f : 1f, 0f), true);
         ghost.movement.rb.isKinematic = false;
         ghost.movement.enabled = true;
     }

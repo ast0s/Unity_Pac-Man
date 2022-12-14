@@ -44,10 +44,7 @@ public class GhostFrightened : GhostBehavior
     {
         eaten = true;
 
-        Vector3 position = ghost.home.inside.position;
-        position.z = ghost.transform.position.z;
-        ghost.transform.position = position;
-
+        ghost.SetPosition(ghost.home.inside.position);
         ghost.home.Enable(duration);
 
         body.enabled = false;

@@ -34,7 +34,8 @@ public class Movement : MonoBehaviour
 
     private void Update()
     {
-        if (nextDirection != Vector2.zero) SetDirection(nextDirection);
+        if (nextDirection != Vector2.zero) 
+            SetDirection(nextDirection);
     }
 
     private void FixedUpdate()

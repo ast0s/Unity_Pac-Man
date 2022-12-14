@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 282840104469370661, guid: da42c801d15cf0f42a63edef1d601190, type: 3}
+      propertyPath: initialBehavior
+      value: 
+      objectReference: {fileID: 6875648106375578566}
     - target: {fileID: 282840104469370671, guid: da42c801d15cf0f42a63edef1d601190, type: 3}
       propertyPath: m_Name
       value: Ghost_Pink
@@ -81,3 +85,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: da42c801d15cf0f42a63edef1d601190, type: 3}
+--- !u!114 &6875648106375578566 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -4671247291774669370, guid: da42c801d15cf0f42a63edef1d601190, type: 3}
+  m_PrefabInstance: {fileID: 6937602606459612672}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa071769ae900e044b7f2c4c82a470a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
