@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Ghost))]
@@ -28,7 +27,7 @@ public abstract class GhostBehavior : MonoBehaviour
 
     public virtual void Disable()
     {
-        enabled = true;
+        enabled = false;
         
         CancelInvoke();
     }

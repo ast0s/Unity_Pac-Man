@@ -97,7 +97,7 @@ MonoBehaviour:
   initialDirection: {x: 0, y: 0}
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
 --- !u!114 &282840104469370661
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0
+  inside: {fileID: 0}
+  outside: {fileID: 0}
 --- !u!114 &-6677113684294510610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3676b4b80ca99574cb00a10fe74bcd99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 20
+  duration: 10
 --- !u!114 &-274233824102744473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +167,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0
+  body: {fileID: 5136006518799473172}
+  eyes: {fileID: 1865793543263920602}
+  blue: {fileID: 6857176057326857046}
+  white: {fileID: 6202157462118503058}
 --- !u!1 &1919721407733485568
 GameObject:
   m_ObjectHideFlags: 0

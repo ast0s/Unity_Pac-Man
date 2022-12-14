@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: duration
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: -4671247291774669370, guid: da42c801d15cf0f42a63edef1d601190, type: 3}
+      propertyPath: duration
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 282840104469370658, guid: da42c801d15cf0f42a63edef1d601190, type: 3}
       propertyPath: initialDirection.x
       value: -1
