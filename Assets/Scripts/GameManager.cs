@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public Text gameOverText;
     public Text scoreText;
     public Text livesText;
+    public Text highScoreText;
 
     public int ghostMultiplier { get; private set; } = 1;
     public int score { get; private set; }
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     {
         SetScore(0);
         SetLives(3);
+        highScoreText.text = PlayerPrefs.GetInt("HighScore", 0).ToString();
         NewRound();
     }
 
@@ -28,6 +30,9 @@ public class GameManager : MonoBehaviour
     {
         if (lives <= 0 && Input.anyKeyDown)
             NewGame();
+
+        if (score >= PlayerPrefs.GetInt("HighScore", 0))
+            SetHighScore(score);
     }
 
     private void NewRound()
@@ -64,6 +69,11 @@ public class GameManager : MonoBehaviour
     {
         this.score = score;
         scoreText.text = score.ToString().PadLeft(2, '0');
+    }
+    private void SetHighScore(int score)
+    {
+        PlayerPrefs.SetInt("HighScore", score);
+        highScoreText.text = score.ToString().PadLeft(2, '0');
     }
     private void SetLives(int lives)
     {
